@@ -1,4 +1,3 @@
-# %%
 import streamlit as st
 import pandas as pd
 import itertools
@@ -8,9 +7,12 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.dates import DateFormatter
 import matplotlib.dates as mdates
-# %%
+import mplcyberpunk
+
+plt.style.use("cyberpunk")
+
 st.title('SALES FORECAST (SARIMAX MODEL)')
-# %%
+
 @st.cache
 def load_data(item, filename="sales_extend.xlsx", start_date='2012-01-01',
                                                   end_date='2022-10-31',
@@ -33,17 +35,17 @@ def load_data(item, filename="sales_extend.xlsx", start_date='2012-01-01',
     data = data[(data.index >= start_date) & (data.index <= end_date)]
     data = data.groupby(pd.Grouper(freq=aggregation)).sum()
     return data
-# %%
+
 actual_items = pd.read_excel('actual_items.xlsx')
 option = st.selectbox(
     'Выберите номенклатуру для прогноза:',
     actual_items.item.unique())
 
-# %%
+
 data_load_state = st.text('Loading data...')
 data = load_data(item=option)
 data_load_state.text('Loading data...done!')
-# %%
+
 def train(data):
     p = d = q = range(0, 2)
     pdq = list(itertools.product(p, d, q))
@@ -86,11 +88,11 @@ def make_forecast(model):
     forecast = model.get_forecast(steps=12).predicted_mean
     return forecast
 
-# %%
+
 model = train(data)
 forecast = make_forecast(model)
 st.line_chart(forecast)
-# %%
+
 if st.button('Рассчитать запасы ГП'):
     st.subheader('Final data')
     def make_data_table(forecast):
