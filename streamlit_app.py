@@ -86,6 +86,8 @@ def predict(model):
 
 def make_forecast(model):
     forecast = model.get_forecast(steps=12).predicted_mean
+    forecast = np.exp(np.log(forecast))
+    forecast = forecast.fillna(0)   
     return forecast
 
 
