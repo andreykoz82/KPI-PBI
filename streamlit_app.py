@@ -8,6 +8,7 @@ import matplotlib as mpl
 from matplotlib.dates import DateFormatter
 import matplotlib.dates as mdates
 import mplcyberpunk
+import plotly.express as px
 
 plt.style.use("cyberpunk")
 
@@ -93,7 +94,13 @@ def make_forecast(model):
 
 model = train(data)
 forecast = make_forecast(model)
-st.line_chart(forecast)
+# st.line_chart(forecast)
+fig = px.line(forecast, x=forecast.index, y="predicted_mean", title="Прогноз продаж", markers=True,
+              template="plotly_dark")
+fig.update_xaxes(title_text='Дата')
+fig.update_yaxes(title_text='Количество, шт.')
+
+st.plotly_chart(fig, use_container_width=True)
 
 if st.button('Рассчитать запасы ГП'):
     st.subheader('Final data')
