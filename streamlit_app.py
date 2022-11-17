@@ -94,7 +94,7 @@ def make_forecast(model):
 
 model = train(data)
 forecast = make_forecast(model)
-# st.line_chart(forecast)
+
 fig = px.line(forecast, x=forecast.index, y="predicted_mean", title="Прогноз продаж", markers=True,
               template="plotly_dark")
 fig.update_xaxes(title_text='Дата')
