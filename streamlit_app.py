@@ -16,7 +16,7 @@ st.title('SALES FORECAST (SARIMAX MODEL)')
 
 @st.cache
 def load_data(item, filename="sales_extend.xlsx", start_date='2012-01-01',
-                                                  end_date='2022-10-31',
+                                                  end_date='2022-11-30',
                                                   aggregation='M'):
     data = pd.read_excel(filename)
     if item != 'All':
