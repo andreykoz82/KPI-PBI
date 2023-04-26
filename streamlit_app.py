@@ -179,7 +179,7 @@ if st.button('Рассчитать запасы ГП'):
                     3: 'MAPE',
                     5: 'DeadLine'})
     .sort_values(by=['Линия производства', 'Запасы (дней)'])
-    .drop(4, 1))
+    .drop(4, axis='columns'))
 
     st.write(final_table)
 
