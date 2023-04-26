@@ -99,6 +99,8 @@ fig = px.line(forecast, x=forecast.index, y="predicted_mean", title="Прогн�
               template="plotly_dark")
 fig.update_xaxes(title_text='Дата')
 fig.update_yaxes(title_text='Количество, шт.')
+fig.update_traces(xbins_size="M1")
+fig.update_xaxes(showgrid=True, ticklabelmode="period", dtick="M1", tickformat="%b\n%Y")
 
 st.plotly_chart(fig, use_container_width=True)
 
